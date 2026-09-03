@@ -297,8 +297,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.13.0",
-  "flutterRoot": "file:///C:/Users/mamaz/OneDrive/Documentos/flutter",
-  "flutterVersion": "3.47.0",
+  "generatorVersion": "3.13.2",
+  "flutterRoot": "file:///C:/flutter",
+  "flutterVersion": "3.47.2",
   "pubCache": "file:///C:/Users/mamaz/AppData/Local/Pub/Cache"
 }
