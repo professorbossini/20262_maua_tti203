@@ -4,13 +4,13 @@ void testes(){
   var europa = {"Alemanha", "Portugal", "Espanha"};
 
   //Todos os países em que se fala português e todos os países da Europa
-  print();
+  print(portugues.union(europa));
   //Todos os países em que se fala português e que são europeus
-  print();
-  //Todos os países em que se fala português e que não são europeus
-  print();
+  // print();
+  // //Todos os países em que se fala português e que não são europeus
+  // print();
   //Todos os países exceto aqueles em que se fala português e que são europeus(simultaneamente)
-  print();
+  print(portugues.union(europa).difference(portugues.intersection(europa)));
 
   //conjuntos
   //união, intersecção, diferença
