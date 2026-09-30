@@ -40,7 +40,19 @@ class AppConfig{
       dbPassword: Env.obrigatoria("DB_PASSWORD"),
       dbPoolSize: Env.inteiro("DB_POOL_SIZE", 10)
     );
+    if(config.serverPort < 1 || config.serverPort > 65535){
+      throw StateError('SERVER_PORT fora da faixa válida: ${config.serverPort}');
+    }
+
+    if(config.dbPoolSize < 1){
+      throw StateError('DB_POOL_SIZE deve ser pelo menos 1: ${config.dbPoolSize}');
+    }
     return config;
   }
 
+
+  @override
+  String toString() {
+    return 'AppConfig(appEnv: $appEnv, serverPort: $serverPort, db: $dbUser@$dbHost:$dbPort/$dbName, pool: $dbPoolSize)';
+  }
 }
