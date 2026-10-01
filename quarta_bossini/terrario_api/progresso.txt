@@ -1,0 +1,2 @@
+01/10/2026: estudamos o modelo de maturidade de richardson
+retomar revisando e vendo a parte de HATEOAS
