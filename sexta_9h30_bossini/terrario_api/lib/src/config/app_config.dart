@@ -1,4 +1,5 @@
 import 'env.dart';
+import 'dart:math';
 class AppConfig{
   final String appEnv;
   final int serverPort;
@@ -9,4 +10,70 @@ class AppConfig{
   final String dbUser;
   final String dbPassword;
   final int dbPoolSize;
+
+  const AppConfig({
+    required this.appEnv,
+    required this.serverPort,
+    required this.logLevel,
+    required this.dbHost,
+    required this.dbPort,
+    required this.dbName,
+    required this.dbUser,
+    required this.dbPassword,
+    required this.dbPoolSize
+  });
+
+  //java
+  // boolean getProducao(){
+  //   return this.appEnv == "production";
+  // }
+  bool get producao => appEnv == 'production';
+
+  //design pattern: singleton
+  factory AppConfig.fromEnv(){
+    final config = AppConfig(
+      appEnv: Env.opcional('APP_ENV', 'development'),
+      serverPort: Env.inteiro('SERVER_PORT', 8080),
+      logLevel: Env.opcional('LOG_LEVEL', 'info'),
+      dbHost: Env.obrigatoria('DB_HOST'),
+      dbPort: Env.inteiro('DB_PORT', 3306),
+      dbName: Env.obrigatoria('DB_NAME'),
+      dbUser: Env.obrigatoria('DB_USER'),
+      dbPassword: Env.obrigatoria('DB_PASSWORD'),
+      dbPoolSize: Env.inteiro('DB_POOL_SIZE', 10)
+    );
+
+    if(config.serverPort < 1 || config.serverPort > pow(2, 16) - 1){
+      throw StateError('SERVER_PORT fora da faixa válida: ${config.serverPort}');
+    }
+
+    if (config.dbPoolSize < 1){
+      throw StateError('DB_POOL_SIZE deve ser pelo menos 1: ${config.dbPoolSize}');
+    }
+
+    return config;
+  }
+
 }
+
+// class AppConfig{
+
+//   private AppConfig(){}
+
+//   private static final AppConfig instancia = null;
+
+//   public static AppConfig getInstance(){
+//     if (instancia == null){
+//       instancia = new AppConfig();
+//       return instancia;
+//     }
+//     return instancia;
+//   }
+// }
+
+// def somar(a, b):
+//   return a + b
+
+// somar(a=2, b=3)
+// somar(b=4, a=2)
+// soma(1, 2)
