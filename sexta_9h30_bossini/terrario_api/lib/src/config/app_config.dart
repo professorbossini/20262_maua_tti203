@@ -54,6 +54,11 @@ class AppConfig{
     return config;
   }
 
+  @override
+  String toString() {
+    return 'AppConfig(appEnv: $appEnv, serverPort: $serverPort, db: $dbUser@$dbHost:$dbPort/$dbName, pool: $dbPoolSize)';
+  }
+
 }
 
 // class AppConfig{
