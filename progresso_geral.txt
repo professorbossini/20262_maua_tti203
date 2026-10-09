@@ -1,3 +1,4 @@
 para quando não ffizermos codigo na aula
 quinta(08/10): encerramos a secao 5, explicando o modelo de maturidade de richardson
 quarta(07/10): encerramos a secao 5, explicando o modelo de maturidade de richardson
+quarta(07/10): falta ver o hateoas
