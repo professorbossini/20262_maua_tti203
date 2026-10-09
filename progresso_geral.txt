@@ -1,4 +1,5 @@
 para quando não ffizermos codigo na aula
+sexta(09/10 09h30): retomar do nivel 1 de maturidade
 quinta(08/10): encerramos a secao 5, explicando o modelo de maturidade de richardson
 quarta(07/10): encerramos a secao 5, explicando o modelo de maturidade de richardson
 quarta(07/10): falta ver o hateoas
