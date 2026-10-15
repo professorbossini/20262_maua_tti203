@@ -43,4 +43,42 @@ class Terrario {
   final DateTime dataMontagem;
   final DateTime? criadoEm;
   final DateTime? atualizadoEm;
+
+  Terrario copyWith({
+    int? id,
+    String? apelido,
+    Bioma? bioma,
+    int? umidadeAlvo,
+    double? volumeLitros,
+    DateTime? dataMontagem,
+  }) {
+    return Terrario(
+      id: id ?? this.id,
+      apelido: apelido ?? this.apelido,
+      bioma: bioma ?? this.bioma,
+      umidadeAlvo: umidadeAlvo ?? this.umidadeAlvo,
+      volumeLitros: volumeLitros ?? this.volumeLitros,
+      dataMontagem: dataMontagem ?? this.dataMontagem,
+      criadoEm: criadoEm,
+      atualizadoEm: atualizadoEm,
+    );
+  }
+
+  // Representação enviada ao cliente. Datas viram texto ISO-8601 e o enum
+  // vira o se nome, que é o formato documentado
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'apelido': apelido,
+    'bioma': bioma.name,
+    'umidadeAlvo': umidadeAlvo,
+    'volumeLitros': volumeLitros,
+    'dataMontagem': _somenteData(dataMontagem),
+    'criadoEm': criadoEm?.toIso8601String(),
+    'atualizadoEm': atualizadoEm?.toIso8601String(),
+  };
+
+  static String _somenteData(DateTime d) => 
+    '${d.year.toString().padLeft(4,'0')}-'
+    '${d.month.toString().padLeft(2,'0')}-'
+    '${d.day.toString().padLeft(2,'0')}';
 }
