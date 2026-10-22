@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'models/image_model.dart';
+import 'widgets/image_list.dart';
 
 import 'dart:convert';
 
@@ -13,16 +14,23 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  int numeroImagens = 0;
+  //começamos de 1 pois não há página 0 na Pexels
+  int numeroImagens = 1;
   List<ImageModel> imagens = [];
   void obterImagem() async {
-    var url = Uri.https('api.pexels.com', '/v1/search', {
-      'query': 'people',
-      'page': '1',
-      'per_page': '1',
-    });
+    var url = Uri.https(
+      'api.pexels.com',
+      '/v1/search',
+      //'query': 'people',
+      // 'page': '1',
+      //número da página requisitada igual ao valor existente em numeroImagens
+      {'query': 'people', 'page': '$numeroImagens', 'per_page': '1'},
+    );
     var req = http.Request('get', url);
-    req.headers.addAll({'Authorization': 'coloque_sua_chave_aqui'});
+    req.headers.addAll({
+      'Authorization':
+          'MCykgXsWgwvdDIt0027ghvD0j8BFNxLjeFqHr0MweIxcopG8xz2y58XI',
+    });
     final result = await req.send();
     if (result.statusCode == 200) {
       http.Response.fromStream(result).then((response) {
@@ -66,9 +74,9 @@ class AppState extends State<App> {
           label: const Text('Adicionar'),
           icon: const Icon(Icons.add),
         ),
-        body: Text("Número de imagems: $numeroImagens"),
-
+        //body: Text("Número de imagems: $numeroImagens"),
         //body: Center(child: Text('Hello World')),
+        body: ImageList(imagens),
       ),
     );
     return app;
