@@ -54,4 +54,20 @@ class Terrario{
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'apelido': apelido,
+    'bioma': bioma.name,
+    'umidadeAlvo': umidadeAlvo,
+    'volumeLitros': volumeLitros,
+    'dataMontagem': _somenteData(dataMontagem),
+    'criadoEm': criadoEm?.toIso8601String(),
+    'atualizadoEm': atualizadoEm?.toIso8601String()       
+  };
+
+  static String _somenteData(DateTime d) =>
+  '${d.year.toString().padLeft(4, '0')}'
+  '${d.month.toString().padLeft(2, '0')}'
+  '${d.day.toString().padLeft(2, '0')}';
+
 }
