@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS terrarios(
   CONSTRAINT ck_terrarios_volume CHECK (volume_litros > 0)
 );
 
-INSERT INT terrarios(
+INSERT INTO terrarios(
   apelido, bioma, umidade_alvo, volume_litros, data_montagem
 )
 VALUES
