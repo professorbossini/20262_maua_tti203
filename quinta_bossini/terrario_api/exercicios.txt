@@ -1,3 +1,4 @@
+quinta, 05/11/2026
 - Estamos no capítulo 8, ap04, página 28
 
 - criar o script do codigo 8.1
