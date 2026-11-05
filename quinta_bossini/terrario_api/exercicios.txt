@@ -1,0 +1,6 @@
+- Estamos no capítulo 8, ap04, página 28
+
+- criar o script do codigo 8.1
+- subir o container docker da pagina 31
+
+para começar git clone  https://github.com/professorbossini/20262_maua_tti203.git .
