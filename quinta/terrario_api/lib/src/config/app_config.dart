@@ -1,6 +1,10 @@
+// Criar uma configuração do ambiente onde a aplicação será executada
+// usando como base as regras de negócio / variáveis carregadas em env.dart
+
 import 'env.dart';
 
 class AppConfig{
+
   const AppConfig({
     required this.appEnv,
     required this.serverPort,
@@ -24,40 +28,39 @@ class AppConfig{
   final String dbPassword;
   final int dbPoolSize;
 
-  // Verdeira quando a aplicacao estiver rodando em producao; usada para decidir o 
-  // nível de detalhe das mensagens de erro devolvidas ao cliente
+  // Verdadeiro quando a aplicação roda em produção; usada para decidir o nível
+  // de detalhe das mensagens de erro devolvidas ao cliente
   bool get producao => appEnv == 'production';
 
-  // factory: é um construtor que não obrigatóriamente precisa criar uma
-  // instância nova; ele vai executar o código antes de devolver o objeto e
-  // pode retonar um valor de cache etc
-  // Um construtor comum não permite isso pois seu corpo só rodo depois que o
-  // objeto já existe
-
+  // factory = construtor que não é obrigado a criar uma nova instância;
+  // ele executa o código antes de criar um objeto e pode guardar os valores 
+  // em memória (cache)
   factory AppConfig.fromEnv() {
     final config = AppConfig(
-      appEnv: Env.opcional("APP_ENV","development"),
-      serverPort: Env.inteiro('SERVER_PORT',8080),
-      logLevel: Env.opcional('LOG_LEVEL', 'info'),
+      appEnv:Env.opcional('APP_ENV','development'),
+      serverPort:Env.inteiro('SERVER_PORT',8080),
+      logLevel: Env.opcional('LOG_LEVEL','info'),
       dbHost: Env.obrigatoria('DB_HOST'),
       dbPort: Env.inteiro('DB_PORT',3306),
       dbName: Env.obrigatoria('DB_NAME'),
       dbUser: Env.obrigatoria('DB_USER'),
       dbPassword: Env.obrigatoria('DB_PASSWORD'),
-      dbPoolSize: Env.inteiro('DB_POOL_SIZE', 10),
+      dbPoolSize: Env.inteiro('DB_POOL_SIZE',10),
     );
 
-    // regras adicionais: serverPort deve estar na faixa entre 1 e 65535
+    // serverPort deve estar dentro de uma faixa
     if(config.serverPort < 1 || config.serverPort > 65535){
-      throw StateError('SERVER_PORT fora da faixa válida: ${config.serverPort}');
+      throw StateError('SERVER_PORT fora da faixa válida: $config.serverPort');
     }
-    // regras adicionas: poolSize deve ser pelo menos 1
-      if(config.dbPoolSize < 1){
+    // poolSize tem que ser pelo menos
+    if(config.dbPoolSize < 1){
       throw StateError('DB_POOL_SIZE deve ser pelo menos 1');
     }
+
     return config;
   }
 
+  // Representação textual para o objeto config
   @override
   String toString() =>
     'AppConfig(appEnv: $appEnv, serverPort: $serverPort,'
